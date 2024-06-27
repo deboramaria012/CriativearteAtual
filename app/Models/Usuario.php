@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario extends Model
 {
-    use HasFactory;
-
     protected $table = 'tblusuarios';
-    protected $primarykey ='id_usuario';
+    protected $primaryKey = 'idUsuario';
+    protected $fillable = [
+        'nomeUsuario', 'emailUsuario', 'senhaUsuario', 'telefoneUsuario', 'tipo_usuario_id', 'tipo_usuario_type', 'created_at', 'updated_at'
+    ];
 
-
-    public function tipo_usuario(){
-        return $this->morphOne('tipo_usuario', 'tipo_usuario_id','tipo_usuario_type');
+    public function cliente()
+    {
+        return $this->belongsTo(ClienteModel::class, 'idCliente', 'idUsuario');
     }
-
 }

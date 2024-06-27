@@ -2,6 +2,6 @@
 
 @section('conteudo-dash')
 
-<h4>Olá, {{ $func->nomeFuncionario }}</h4>
+<h4>Olá, {{ $func->nomeCliente }}</h4>
 
 @endsection

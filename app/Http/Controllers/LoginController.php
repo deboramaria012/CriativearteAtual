@@ -11,7 +11,6 @@ class LoginController extends Controller
     {
         return view('site.login');
     }
-
     public function autenticar(Request $request)
     {
         $email = $request->input('email');
@@ -23,13 +22,23 @@ class LoginController extends Controller
         $cliente = ClienteModel::where('emailCliente', $email)->first();
 
         if ($cliente && $cliente->senhaCliente === $senhaClienteBigInt) {
+            $usuario = $cliente->usuario; // Relacionamento definido no modelo
+
             session([
                 'email' => $cliente->emailCliente,
                 'id' => $cliente->idCliente,
-                'tipo' => $cliente->tipo_usuario // Certifique-se de que 'tipo_usuario' existe em ClienteModel
+                'tipo_usuario_type' => $usuario ? $usuario->tipo_usuario_type : null, // Certifique-se de que 'tipo_usuario_type' existe no relacionamento
+                'nomeUsuario' => $cliente->nomeCliente
             ]);
 
-            return redirect()->intended('/dashboard/cliente');
+            // Verifique a autenticação
+            if ($usuario && $usuario->tipo_usuario_type == 'cliente') {
+                return redirect()->route('dashboard.cliente');
+            } elseif ($usuario && $usuario->tipo_usuario_type == 'administrador') {
+                return redirect()->route('dashboard.administrador');
+            } else {
+                return back()->withErrors(['email' => 'Tipo de usuário inválido.']);
+            }
         } else {
             return back()->withErrors(['email' => 'Credenciais inválidas.']);
         }

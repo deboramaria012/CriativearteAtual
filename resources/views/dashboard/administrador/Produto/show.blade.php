@@ -1,8 +1,8 @@
-<!-- resources/views/produtos/show.blade.php -->
 
-@extends('layouts.app')
+@extends('layoutdash.layout')
 
-@section('content')
+@section('conteudo')
+
     <div class="container">
         <h1>{{ $produto->nome }}</h1>
         <p><strong>Descrição:</strong> {{ $produto->descricao }}</p>

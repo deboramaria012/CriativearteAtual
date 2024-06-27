@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title') Dashboard</title>
-    <!-- ICONS -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- STYLESHEET -->
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('Dashboard')</title>
     <style>
-        @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+        @import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900');
 
         /* Reset CSS */
         * {
@@ -182,8 +177,7 @@
             position: absolute;
             left: -5px;
             top: 20%;
-            width: 20
-            px;
+            width: 20px;
             height: 20px;
             border-radius: 2px;
             background-color: #000;
@@ -215,22 +209,68 @@
         }
 
     </style>
-
-
 </head>
 <body>
-<div class="container">
+    @if (session('tipo_usuario_type') == 'cliente')
     <div class="sidebar">
-        <div class="menu-btn">
-            <i class="ph-bold ph-caret-left"></i>
-        </div>
         <div class="head">
             <div class="user-img">
                 <img src="user.jpg" alt="" />
             </div>
             <div class="user-details">
-                <p class="title">web developer</p>
-                <p class="name">John Doe</p>
+                <p class="title">Cliente</p>
+                {{-- <p class="name">{{ session('nomeUsuario') }}</p> --}}
+            </div>
+        </div>
+        <div class="nav">
+            <div class="menu">
+                <p class="title">Main</p>
+                <ul>
+                    <li>
+                        <a href="{{ route('dashboard.cliente.cliente') }}">
+                            <i class="icon ph-bold ph-house-simple"></i>
+                            <span class="text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="#">
+                            <i class="icon ph-bold ph-file-text"></i>
+                            <span class="text">Posts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon ph-bold ph-calendar-blank"></i>
+                            <span class="text">Schedules</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="icon ph-bold ph-gear"></i>
+                            <span class="text">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="menu-btn">
+            <i class="ph ph-chevron-left"></i>
+        </div>
+    </div>
+
+    <div class="container">
+        @yield('conteudo-dash')
+        <!-- Content for Cliente -->
+    </div>
+    @elseif(session('tipo_usuario_type') == 'administrador')
+    <div class="sidebar">
+        <div class="head">
+            <div class="user-img">
+                <img src="user.jpg" alt="" />
+            </div>
+            <div class="user-details">
+                <p class="title">Administrador</p>
+                <p class="name">{{ session('nomeUsuario') }}</p>
             </div>
         </div>
         <div class="nav">
@@ -242,25 +282,6 @@
                             <i class="icon ph-bold ph-house-simple"></i>
                             <span class="text">Dashboard</span>
                         </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="icon ph-bold ph-user"></i>
-                            <span class="text">Audience</span>
-                            <i class="arrow ph-bold ph-caret-down"></i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="#">
-                                    <span class="text">Users</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="text">Subscribers</span>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="active">
                         <a href="#">
@@ -310,29 +331,11 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.cliente.edit') }}">
-                            <i class="icon ph-bold ph-pencil"></i>
-                            <span class="text">Edit Cliente</span>
+                        <a href="{{ route('admin.cliente.index') }}">
+                            <i class="icon ph-bold ph-people"></i>
+                            <span class="text">Clientes</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('admin.cliente.update') }}">
-                            <i class="icon ph-bold ph-refresh"></i>
-                            <span class="text">Update Cliente</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('admin.cliente.destroy') }}">
-                            <i class="icon ph-bold ph-trash"></i>
-                            <span class="text">Delete Cliente</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="menu">
-                <p class="title">Settings</p>
-                <ul>
-
                     <li>
                         <a href="#">
                             <i class="icon ph-bold ph-gear"></i>
@@ -342,48 +345,25 @@
                 </ul>
             </div>
         </div>
-        <div class="menu">
-            <p class="title">Account</p>
-            <ul>
-                <li>
-                    <a href="#">
-                        <i class="icon ph-bold ph-info"></i>
-                        <span class="text">Help</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="icon ph-bold ph-sign-out"></i>
-                        <span class="text">Logout</span>
-                    </a>
-                </li>
-            </ul>
+        <div class="menu-btn">
+            <i class="ph ph-chevron-left"></i>
         </div>
     </div>
-    <div class="credits">
-        @yield('conteudo-dash')
+
+    <div class="container">
+        @yield('conteudo-dashAdm')
+        <!-- Content for Administrador -->
     </div>
-</div>
+    @endif
 
-<!-- Jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous"></script>
-<script>
-    $(".menu > ul > li").click(function (e) {
-        // remove active from already active
-        $(this).siblings().removeClass("active");
-        // add active to clicked
-        $(this).toggleClass("active");
-        // if has sub menu open it
-        $(this).find("ul").slideToggle();
-        // close other sub menu if any open
-        $(this).siblings().find("ul").slideUp();
-        // remove active class of sub menu items
-        $(this).siblings().find("ul").find("li").removeClass("active");
-    });
+    <script>
+        const menuBtn = document.querySelector(".menu-btn");
+        const sidebar = document.querySelector(".sidebar");
 
-    $(".menu-btn").click(function () {
-        $(".sidebar").toggleClass("active");
-    });
-</script>
+        menuBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+        });
+    </script>
 </body>
+
 </html>

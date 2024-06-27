@@ -1,8 +1,9 @@
 <!-- resources/views/produtos/edit.blade.php -->
 
-@extends('layouts.app')
+@extends('layoutdash.layout')
 
-@section('content')
+@section('conteudo')
+
     <div class="container">
         <h1>Editar Produto</h1>
 

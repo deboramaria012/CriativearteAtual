@@ -13,14 +13,11 @@ class ClienteController extends Controller
         $idCliente = session('id');
         $cliente = ClienteModel::find($idCliente);
 
-        $tipoUsuario = session('tipo');
-        $usuario = Usuario::where('tipo_usuario', $tipoUsuario)->first();
-
         if (!$cliente) {
             abort(404, 'Cliente não encontrado');
         }
 
-        return view('site.dashboard.administrador.cliente', compact('cliente', 'usuario'));
+        return view('dashboard.administrador.cliente.cliente', compact('cliente'));
     }
 
 

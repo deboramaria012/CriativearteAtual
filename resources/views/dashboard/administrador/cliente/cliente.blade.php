@@ -1,7 +1,10 @@
-@extends('layoutdash.layout')
+@extends('site.dashboard.layoudash.layout')
+
+{{-- @section('Dashboard') --}}
 
 @section('conteudo-dash')
 
+{{--
 <form method="POST" action="{{ route('admin.cliente.store') }}">
     @csrf
     <div>
@@ -17,7 +20,8 @@
         <input id="telefoneCliente" type="text" name="telefoneCliente" required>
     </div>
     <button type="submit">Cadastrar</button>
-</form>
+</form> --}}
 
+<h1>teste</h1>
 
 @endsection

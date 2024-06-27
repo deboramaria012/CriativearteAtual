@@ -1,8 +1,8 @@
-<!-- resources/views/produtos/create.blade.php -->
 
-@extends('layouts.app')
+@extends('layoutdash.layout')
 
-@section('content')
+@section('conteudo')
+
     <div class="container">
         <h1>Criar Produto</h1>
 

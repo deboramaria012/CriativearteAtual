@@ -34,18 +34,29 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'autenticar'])->name('login.autenticar');
 
 
+Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+Route::post('/adicionar-ao-carrinho', [CarrinhoController::class, 'adicionarAoCarrinho'])->name('adicionarAoCarrinho');
+Route::post('/remover-item-carrinho', [CarrinhoController::class, 'removerItemCarrinho'])->name('removerItemCarrinho');
+
 
 // Route::resource('gallery', GaleriaController::class);
 
 
-Route::middleware(['autenticacao:cliente'])->group(function (){
+// Route::middleware(['autenticacao:cliente'])->group(function (){
 
-    Route::get('/dashboard/cliente',[ClienteController::class,'index'])->name('dashboard.cliente.cliente');
+//     Route::get('/dashboard/cliente',[ClienteController::class,'index'])->name('dashboard.administrador.cliente.cliente');
+
+//  });
 
 
- });
 
-
+// Rotas para cliente com middleware de autenticação
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/cliente', [ClienteController::class, 'index'])->name('dashboard.cliente');
+    Route::get('/dashboard/administrador', function () {
+        return view('dashboard.administrador');
+    })->name('dashboard.administrador');
+});
 
 Route::prefix('admin')->middleware('autenticacao')->group(function () {
 

@@ -1,8 +1,8 @@
-<!-- resources/views/produtos/index.blade.php -->
 
-@extends('layouts.app')
 
-@section('content')
+@extends('layoutdash.layout')
+
+@section('conteudo')
 
 
     <div class="container">

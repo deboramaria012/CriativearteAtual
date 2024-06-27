@@ -1,6 +1,9 @@
-@extends('layoutdash.layout')
+@extends('layout.layoutdash')
+
+@section('Dashboard')
 
 @section('conteudo-dash')
+
 <form method="POST" action="{{ route('admin.cliente.store') }}">
     @csrf
     <div>
