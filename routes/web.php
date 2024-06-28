@@ -58,8 +58,8 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard.administrador');
 });
 
-Route::prefix('admin')->middleware('autenticacao')->group(function () {
 
+Route::prefix('admin')->middleware('autenticacao')->group(function () {
     Route::get('/clientes', [AdminController::class, 'indexCliente'])->name('admin.cliente.index');
     Route::get('/clientes/create', [AdminController::class, 'createCliente'])->name('admin.cliente.create');
     Route::post('/clientes', [AdminController::class, 'storeCliente'])->name('admin.cliente.store');
@@ -67,6 +67,7 @@ Route::prefix('admin')->middleware('autenticacao')->group(function () {
     Route::put('/clientes/{id}', [AdminController::class, 'updateCliente'])->name('admin.cliente.update');
     Route::delete('/clientes/{id}', [AdminController::class, 'destroyCliente'])->name('admin.cliente.destroy');
 });
+
 
 
 

@@ -20,6 +20,9 @@ class ClienteController extends Controller
         return view('dashboard.administrador.cliente.cliente', compact('cliente'));
     }
 
+    
+
+
 
 
 

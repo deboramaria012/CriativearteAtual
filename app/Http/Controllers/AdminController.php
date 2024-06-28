@@ -34,7 +34,7 @@ class AdminController extends Controller
             $cliente->telefone = $request->input('telefoneCliente');
             $cliente->save();
 
-            return redirect()->route('admin.cliente.index')->with('success', 'Cliente cadastrado com sucesso.');
+            return redirect()->route('dashboard.cliente')->with('success', 'Cliente cadastrado com sucesso.');
         } catch (\Exception $e) {
             return redirect()->route('admin.cliente.create')->with('error', 'Erro ao cadastrar cliente: ' . $e->getMessage());
         }
